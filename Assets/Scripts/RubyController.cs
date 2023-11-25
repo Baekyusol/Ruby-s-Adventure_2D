@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class RubyController : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class RubyController : MonoBehaviour
     public int maxHealth = 5;
     public float timeInvincible = 2.0f;
     public GameObject projectilePrefab;
+    public ChangeScene change;
 
     public int health {  get { return currentHealth; } }
     int currentHealth;
@@ -72,8 +75,14 @@ public class RubyController : MonoBehaviour
             isInvincible = true;
             invincibleTimer = timeInvincible;
         }
+        animator.SetTrigger("Hit");
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        Debug.Log(currentHealth + "/" + maxHealth);
+        UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
+
+        if(currentHealth == 0)
+        {
+            SceneManager.LoadScene("EndScene");
+        }
     }
 
     void Launch()

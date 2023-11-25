@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -53,7 +52,6 @@ public class EnemyController : MonoBehaviour
         }
 
         rigidbody2D.MovePosition(position);
-
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -70,6 +68,6 @@ public class EnemyController : MonoBehaviour
     {
         broken = false;
         rigidbody2D.simulated = false;
-        // 선택사항 : animator.SetTrigger("Fixed");
+        animator.SetTrigger("Fixed");
     }
 }
